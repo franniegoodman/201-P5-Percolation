@@ -101,6 +101,8 @@ public class PercolationDefault implements IPercolate{
 	 * @param row
 	 * @param col
 	 */
+	
+	
 	protected void updateOnOpen(int row, int col) {
 		if (row == 0) {
 			// it's in the top row, search from there
@@ -119,6 +121,7 @@ public class PercolationDefault implements IPercolate{
 			}
 		}
 	}
+	
 
 	/**
 	 * Returns true if and only if system percolates

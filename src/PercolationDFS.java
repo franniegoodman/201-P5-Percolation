@@ -6,34 +6,38 @@ public class PercolationDFS extends PercolationDefault{
         super(size);
     }
     @Override
-    protected void search(int row, int col) {
-		// out of bounds?
-		if (! inBounds(row,col)) return;
-		
-		// full or NOT open, don't process
-		if (isFull(row, col) || !isOpen(row, col)){
-			return;
-		}
+    protected void search(int startRow, int startCol) {
+        // out of bounds?
+        if (!inBounds(startRow, startCol)) return;
 
-		int[] rowDelta = {-1, 1, 0 , 0};
-		int[] colDelta = {0, 0, -1, 1};
-		if (myGrid[row][col] != FULL) return;
-		Stack<int[]> stack = new Stack<>();
-		myGrid[row][col] = FULL;
-		stack.push(new int[]{row, col});
-		while (stack.size() != 0){
-			int[] cords = stack.pop();
-			for (int k = 0; k < rowDelta.length; k++){
-				row = cords[0] + rowDelta[k];
-				col = cords[1] + colDelta[k];
-				if (inBounds(row, col) && myGrid[row][col] != FULL){
-					stack.push(new int[]{row, col});
-					myGrid[row][col] = FULL;
-				}
-			}
-		}
+        // full or NOT open, don't process
+        if (isFull(startRow, startCol) || !isOpen(startRow, startCol)) {
+            return;
+        }
 
-	}
+        int[] rowDelta = {-1, 1, 0, 0};
+        int[] colDelta = {0, 0, -1, 1};
+
+        Stack<int[]> stack = new Stack<>();
+        stack.push(new int[]{startRow, startCol});
+
+        while (!stack.isEmpty()) {
+            int[] coordinates = stack.pop();
+            int row = coordinates[0];
+            int col = coordinates[1];
+
+            myGrid[row][col] = FULL;
+
+            for (int k = 0; k < rowDelta.length; k++) {
+                int newRow = row + rowDelta[k];
+                int newCol = col + colDelta[k];
+
+                if (inBounds(newRow, newCol) && myGrid[newRow][newCol] != FULL) {
+                    stack.push(new int[]{newRow, newCol});
+                }
+            }
+        }
+    }
 
     
 

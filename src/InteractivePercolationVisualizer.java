@@ -6,7 +6,6 @@
  * @author Josh Hug
  * @author Owen Astrachan
  ******************************************************************************/
-//HE LICK THE HONEY UP MY PERCOLATER
 import java.awt.Font;
 
 public class InteractivePercolationVisualizer {

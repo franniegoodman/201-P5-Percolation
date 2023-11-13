@@ -20,8 +20,8 @@ public class InteractivePercolationVisualizer {
 		}
 
 		//IPercolate perc = new PercolationDefault(N);
-		//IPercolate perc = new PercolationDFS(N);
-		IPercolate perc = new PercolationUF(new QuickUWPC(),N);
+		IPercolate perc = new PercolationDFS(N);
+		//IPercolate perc = new PercolationUF(new QuickUWPC(),N);
 		//IPercolate perc = new PercolationBFS(N);
 		System.out.printf("visualizing %dx%d grid\n",N,N);
 

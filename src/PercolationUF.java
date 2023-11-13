@@ -53,9 +53,7 @@ public class PercolationUF implements IPercolate{
     @Override
     public boolean isFull(int row, int col){
         if (! inBounds(row, col)) throw new IndexOutOfBoundsException(getIndex(row, col));
-        if (myGrid.length == 1) return isOpen(row, col);
-    
-        return myFinder.connected(VTOP, getIndex(row, col)) && isOpen(row, col);
+        return myFinder.connected(getIndex(row, col), VTOP);
     }
 
     @Override

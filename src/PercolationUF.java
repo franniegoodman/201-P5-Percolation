@@ -40,7 +40,7 @@ public class PercolationUF implements IPercolate{
         if (inBounds(row, col-1) && isOpen(row, col-1)) myFinder.union(getIndex(row, col), getIndex(row, col-1));
         if (inBounds(row, col+1) && isOpen(row, col+1)) myFinder.union(getIndex(row, col), getIndex(row, col+1));
         if (row == 0) myFinder.union(getIndex(row, col), VTOP);
-        if (row == mySize) myFinder.union(getIndex(row, col), VBOTTOM);
+        if (row == mySize-1) myFinder.union(getIndex(row, col), VBOTTOM);
         
     }
 

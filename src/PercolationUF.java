@@ -31,14 +31,14 @@ public class PercolationUF implements IPercolate{
     public void open(int row, int col){
         if (! inBounds(row, col)) throw new IndexOutOfBoundsException(getIndex(row, col));
         if (!isOpen(row, col)){
-        //if (this.myGrid == null) throw new IllegalArgumentException("Grid null");
+        if (this.myGrid == null) throw new IllegalArgumentException("Grid null");
             myGrid[row][col] = true;
             myOpenCount++;
         }
-        if (isOpen(row-1, col)) myFinder.union(getIndex(row, col), getIndex(row-1, col));
-        if (isOpen(row+1, col)) myFinder.union(getIndex(row, col), getIndex(row+1, col));
-        if (isOpen(row, col-1)) myFinder.union(getIndex(row, col), getIndex(row, col-1));
-        if (isOpen(row, col+1)) myFinder.union(getIndex(row, col), getIndex(row, col+1));
+        if (inBounds(row-1, col) && isOpen(row-1, col)) myFinder.union(getIndex(row, col), getIndex(row-1, col));
+        if (inBounds(row+1, col) && isOpen(row+1, col)) myFinder.union(getIndex(row, col), getIndex(row+1, col));
+        if (inBounds(row, col-1) && isOpen(row, col-1)) myFinder.union(getIndex(row, col), getIndex(row, col-1));
+        if (inBounds(row, col+1) && isOpen(row, col+1)) myFinder.union(getIndex(row, col), getIndex(row, col+1));
         if (getIndex(row, col) <= mySize) myFinder.union(getIndex(row, col), VTOP);
         if (getIndex(row, col) >= (mySize)*(mySize) - mySize) myFinder.union(getIndex(row, col), VBOTTOM);
         
@@ -65,13 +65,11 @@ public class PercolationUF implements IPercolate{
         return row*mySize + col;
     }
 
-
-
-    public boolean inBounds(int row, int col){
+    public boolean inBounds(int row, int col) {
         if (this.myGrid == null) return false;
-        if (row < mySize && col < mySize) return true;
-        return false;
+        return row >= 0 && row < mySize && col >= 0 && col < mySize;
     }
+
     @Override
     public int numberOfOpenSites(){
         return myOpenCount;
